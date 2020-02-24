@@ -1,10 +1,11 @@
-var GraphQLServer = require('graphql-yoga').GraphQLServer;
-var links = [{
-        id: 'link-0',
-        url: 'www.howtographql.com',
-        description: 'Fullstack tutorial for GraphQL'
-    }];
-// 1
+var GraphQLServer = require("graphql-yoga").GraphQLServer;
+var links = [
+    {
+        id: "link-0",
+        url: "www.howtographql.com",
+        description: "Fullstack tutorial for GraphQL"
+    }
+];
 var idCount = links.length;
 var resolvers = {
     Query: {
@@ -13,7 +14,6 @@ var resolvers = {
         link: function (parent, args) { return links.find(function (link) { return link.id === args.id; }); }
     },
     Mutation: {
-        // 2
         post: function (parent, args) {
             var link = {
                 id: "link-" + idCount++,
@@ -45,9 +45,9 @@ var resolvers = {
         }
     }
 };
-// 3
 var server = new GraphQLServer({
     typeDefs: "./src/schema.graphql",
     resolvers: resolvers
 });
 server.start(function () { return console.log("Server is running on http://localhost:4000"); });
+//# sourceMappingURL=index.js.map

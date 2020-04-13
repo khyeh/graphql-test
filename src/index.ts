@@ -4,8 +4,8 @@ const links = [
   {
     id: "link-0",
     url: "www.howtographql.com",
-    description: "Fullstack tutorial for GraphQL"
-  }
+    description: "Fullstack tutorial for GraphQL",
+  },
 ];
 
 let idCount = links.length;
@@ -14,7 +14,7 @@ const resolvers = {
   Query: {
     info: () => `This is the API of a Hackernews Clone`,
     feed: () => links,
-    link: (parent, args) => links.find(link => link.id === args.id)
+    link: (parent, args) => links.find((link) => link.id === args.id),
   },
   Mutation: {
     // 2
@@ -22,14 +22,14 @@ const resolvers = {
       const link = {
         id: `link-${idCount++}`,
         description: args.description,
-        url: args.url
+        url: args.url,
       };
       links.push(link);
       return link;
     },
     updateLink: (parent, args) => {
       let updatedLink = {};
-      links.forEach(link => {
+      links.forEach((link) => {
         if (link.id === args.id) {
           link.url = args.url;
           link.description = args.description;
@@ -46,12 +46,12 @@ const resolvers = {
         }
       });
       return deletedLink;
-    }
-  }
+    },
+  },
 };
 
 const server = new GraphQLServer({
   typeDefs: "./src/schema.graphql",
-  resolvers
+  resolvers,
 });
 server.start(() => console.log(`Server is running on http://localhost:4000`));
